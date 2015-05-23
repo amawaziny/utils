@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+    
+    <name>faces-utils</name>
+    <application>
+        <system-event-listener>
+            <source-class>javax.faces.application.Application</source-class>
+            <system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+            <system-event-listener-class>org.qfast.webapp.Initializer</system-event-listener-class>
+        </system-event-listener>
+    </application>
+</faces-config>
