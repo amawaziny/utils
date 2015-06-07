@@ -15,22 +15,22 @@
  */
 package org.qfast.facade;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
- * @author Ahmed El-mawaziny
  * @param <T>
+ * @author Ahmed El-mawaziny
  */
 public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
 
-    
+
     private final Class<T> entityClass;
 
     public AbstractFacade(Class<T> entityClass) {
@@ -68,9 +68,16 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
         }
         return entities;
     }
-    
+
     @Override
     public void edit(Collection<T> entities) {
+        for (T t : entities) {
+            edit(t);
+        }
+    }
+
+    @Override
+    public void edit(T[] entities) {
         for (T t : entities) {
             edit(t);
         }

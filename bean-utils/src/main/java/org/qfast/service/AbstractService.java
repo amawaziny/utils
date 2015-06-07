@@ -15,16 +15,19 @@
  */
 package org.qfast.service;
 
-import java.io.Serializable;
 import org.qfast.facade.InterfaceFacade;
+
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * @author Ahmed El-mawaziny
  * @param <T>
+ * @author Ahmed El-mawaziny
  */
 public abstract class AbstractService<T> implements InterfaceFacade<T>, Serializable {
+
+    private static final long serialVersionUID = -2331444447660962696L;
 
     @Override
     public void create(T entity) {
@@ -47,7 +50,17 @@ public abstract class AbstractService<T> implements InterfaceFacade<T>, Serializ
     }
 
     @Override
+    public Collection<T> merge(Collection<T> entity) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void edit(Collection<T> entities) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void edit(T[] entities) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -85,5 +98,4 @@ public abstract class AbstractService<T> implements InterfaceFacade<T>, Serializ
     public void removeAll(String[] ids) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    private static final long serialVersionUID = -2331444447660962696L;
 }
