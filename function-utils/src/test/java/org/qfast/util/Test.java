@@ -17,7 +17,11 @@
 package org.qfast.util;
 
 import static java.nio.charset.StandardCharsets.UTF_16BE;
+
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -33,6 +37,53 @@ public class Test {
 //        System.out.println(displayNames);
 //        System.out.println(Util.rpadTrunk("dopay", 1));
 //        System.out.println(Arrays.toString(getBytes("عربي Test")));
+
+        TestClass t= new TestClass();
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(t.date));
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(t.date);
+        t= new TestClass();
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(t.date));
     }
 //    
 //    private static byte[] getBytes(String message) {
@@ -52,4 +103,8 @@ public class Test {
 //    public static boolean isLatinLetter(char c) {
 //        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 //    }
+
+    static class TestClass{
+        public final static Date date = new Date();
+    }
 }

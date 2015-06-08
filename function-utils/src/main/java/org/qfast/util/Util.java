@@ -169,6 +169,13 @@ public final class Util {
             return "";
         }
     }
+    public static String formatDate(Date date, Locale locale) {
+        if (!isNULL(date)) {
+            return new SimpleDateFormat(locale).format(date);
+        } else {
+            return "";
+        }
+    }
 
     public static String formatDate(Date date) {
         if (!isNULL(date)) {
@@ -231,17 +238,11 @@ public final class Util {
     }
 
     public static boolean isNumeric(String str) {
-        if (isNULL(str)) {
-            return false;
-        }
-        return str.matches(NUMERIC_PATTERN);
+        return !isNULL(str) && str.matches(NUMERIC_PATTERN);
     }
 
     public static boolean isInteger(String str) {
-        if (isNULL(str)) {
-            return false;
-        }
-        return str.matches(INTEGER_PATTERN);
+        return !isNULL(str) && str.matches(INTEGER_PATTERN);
     }
 
     public static int toIntVal(Object val) {
@@ -341,7 +342,7 @@ public final class Util {
         return getDate(1);
     }
 
-    public static Date getYasterday() {
+    public static Date getYesterday() {
         return getDate(-1);
     }
 
@@ -522,10 +523,7 @@ public final class Util {
     }
 
     public static boolean getBoolean(Integer i) {
-        if (!isNULL(i)) {
-            return i > 0;
-        }
-        return false;
+        return !isNULL(i) && i > 0;
     }
 
     public static boolean getBoolean(Double i) {
@@ -571,7 +569,7 @@ public final class Util {
     public static String encodeUrl(String s) {
         try {
             s = URLEncoder.encode(s, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException ignored) {
         }
         return s;
     }
