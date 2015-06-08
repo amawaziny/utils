@@ -19,8 +19,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author Ahmed El-mawaziny
  * @param <T>
+ * @author Ahmed El-mawaziny
  */
 public interface InterfaceFacade<T> {
 
@@ -37,6 +37,8 @@ public interface InterfaceFacade<T> {
     public Collection<T> merge(Collection<T> entities);
 
     public void edit(Collection<T> entities);
+
+    public void edit(T[] entities);
 
     public T find(Object id);
 
