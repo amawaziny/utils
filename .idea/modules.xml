@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bean-utils/bean-utils.iml" filepath="$PROJECT_DIR$/bean-utils/bean-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/faces-utils/faces-utils.iml" filepath="$PROJECT_DIR$/faces-utils/faces-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/faces-utils/faces-utils.iml" filepath="$PROJECT_DIR$/faces-utils/faces-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/function-utils/function-utils.iml" filepath="$PROJECT_DIR$/function-utils/function-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/function-utils/function-utils.iml" filepath="$PROJECT_DIR$/function-utils/function-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils (1) (org.qfast).iml" filepath="$PROJECT_DIR$/utils (1) (org.qfast).iml" />
       <module fileurl="file://$PROJECT_DIR$/utils/utils (2) (org.qfast.utils).iml" filepath="$PROJECT_DIR$/utils/utils (2) (org.qfast.utils).iml" />
     </modules>

@@ -1,20 +1,16 @@
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/reports/Report.java
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/qualifiers/UserSession.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/qualifiers/MenuBarSession.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/util/SelectTranslatableCompose.java
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/util/SelectTranslatableBuilder.java
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/facade/InterfaceFacade.java
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/entities/AbstractTranslatableEntity.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/entities/AbstractEntity.java
-<<<<<<< HEAD
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/validation/LocaleMessageInterpolator.java
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/facade/AbstractTranslatableFacade.java
-=======
->>>>>>> 9b09552c63a51239ffe799a8aab2884bd4c88d46
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/adapter/DateTimeAdapter.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/facade/AbstractTranslatableFacade.java
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/entities/IActivityLog.java
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/facade/AbstractFacade.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/facade/InterfaceFacade.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/service/AbstractService.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/validation/LocaleMessageInterpolator.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/adapter/DateTimeStringAdapter.java
 /home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/reports/ReportResult.java
-/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/util/SelectTranslatableBuilder.java
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/entities/AbstractEntity.java
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/util/SelectTranslatableCompose.java
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/adapter/DateTimeStringAdapter.java
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/qualifiers/MenuBarSession.java
+/home/ahmed/NetBeansProjects/utils/bean-utils/src/main/java/org/qfast/service/AbstractService.java

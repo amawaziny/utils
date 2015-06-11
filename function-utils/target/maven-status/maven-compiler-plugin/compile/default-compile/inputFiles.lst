@@ -1,20 +1,15 @@
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NotNullNotEmpty.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/HttpRequest.java
-<<<<<<< HEAD
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NationalIdValidator.java
 /home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NumericValidation.java
-=======
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NumericValidation.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NationalIdValidator.java
->>>>>>> 9b09552c63a51239ffe799a8aab2884bd4c88d46
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/DateDiff.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/NationalID.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/Util.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NationalId.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/exc/OperationException.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NotNullNotEmptyValidator.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/Numeric.java
 /home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/exc/ExceptionHandlerUtil.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/RandomStringUtils.java
 /home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/CleanUp.java
 /home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/ExcelUtils.java
-/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/Numeric.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/Util.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NotNullNotEmpty.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NationalIdValidator.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NotNullNotEmptyValidator.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/exc/OperationException.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/HttpRequest.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/NationalID.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/DateDiff.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/RandomStringUtils.java
+/home/ahmed/NetBeansProjects/utils/function-utils/src/main/java/org/qfast/util/validation/NationalId.java

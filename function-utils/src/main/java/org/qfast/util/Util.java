@@ -15,6 +15,9 @@
  */
 package org.qfast.util;
 
+import org.apache.commons.codec.binary.Base64;
+
+import javax.ws.rs.core.MultivaluedMap;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,6 +32,7 @@ import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,8 +47,6 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.core.MultivaluedMap;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * @author Ahmed El-mawaziny
@@ -62,6 +64,15 @@ public final class Util {
     public static final String EXCEL_CONTENT_TYPE = "application/vnd.ms-excel";
     public static final String NUMERIC_PATTERN = "-?\\d+(\\.\\d+)?";
     public static final String INTEGER_PATTERN = "^[\\d]+$";
+    public static final long ONE_KB = 1024;
+    public static final BigDecimal ONE_KB_BD = BigDecimal.valueOf(ONE_KB);
+    public static final BigDecimal ONE_MB_BD = ONE_KB_BD.multiply(ONE_KB_BD);
+    public static final BigDecimal ONE_GB_BD = ONE_KB_BD.multiply(ONE_MB_BD);
+    public static final BigDecimal ONE_TB_BD = ONE_KB_BD.multiply(ONE_GB_BD);
+    public static final BigDecimal ONE_PB_BD = ONE_KB_BD.multiply(ONE_TB_BD);
+    public static final BigDecimal ONE_EB_BD = ONE_KB_BD.multiply(ONE_PB_BD);
+    public static final BigDecimal ONE_ZB_BD = ONE_KB_BD.multiply(ONE_EB_BD);
+    public static final BigDecimal ONE_YB_BD = ONE_KB_BD.multiply(ONE_ZB_BD);
     private static final Logger LOG = Logger.getLogger(Util.class.getName());
 
     private Util() {
@@ -169,9 +180,20 @@ public final class Util {
             return "";
         }
     }
+
     public static String formatDate(Date date, Locale locale) {
         if (!isNULL(date)) {
-            return new SimpleDateFormat(locale).format(date);
+            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+            return dateFormat.format(date);
+        } else {
+            return "";
+        }
+    }
+
+    public static String formatDateTime(Date date, Locale locale) {
+        if (!isNULL(date)) {
+            DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, locale);
+            return dateFormat.format(date);
         } else {
             return "";
         }
@@ -258,16 +280,6 @@ public final class Util {
         }
         return null;
     }
-
-    public static final long ONE_KB = 1024;
-    public static final BigDecimal ONE_KB_BD = BigDecimal.valueOf(ONE_KB);
-    public static final BigDecimal ONE_MB_BD = ONE_KB_BD.multiply(ONE_KB_BD);
-    public static final BigDecimal ONE_GB_BD = ONE_KB_BD.multiply(ONE_MB_BD);
-    public static final BigDecimal ONE_TB_BD = ONE_KB_BD.multiply(ONE_GB_BD);
-    public static final BigDecimal ONE_PB_BD = ONE_KB_BD.multiply(ONE_TB_BD);
-    public static final BigDecimal ONE_EB_BD = ONE_KB_BD.multiply(ONE_PB_BD);
-    public static final BigDecimal ONE_ZB_BD = ONE_KB_BD.multiply(ONE_EB_BD);
-    public static final BigDecimal ONE_YB_BD = ONE_KB_BD.multiply(ONE_ZB_BD);
 
     public static String byteCountToDisplaySize(BigDecimal size) {
         String displaySize;
@@ -479,7 +491,7 @@ public final class Util {
     }
 
     public static Map<String, String> getFragmentAsMap(String fragment,
-            String splitToken) {
+                                                       String splitToken) {
         if (!isNULL(fragment) && !isNULL(splitToken)) {
             String[] fragmentArr = fragment.split(splitToken);
             Map<String, String> map
