@@ -70,6 +70,16 @@ public abstract class AbstractService<T> implements InterfaceFacade<T>, Serializ
     }
 
     @Override
+    public List<T> find(Object[] id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<T> findAll(List ids) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public List<T> findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

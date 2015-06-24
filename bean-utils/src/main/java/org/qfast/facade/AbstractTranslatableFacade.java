@@ -15,25 +15,26 @@
  */
 package org.qfast.facade;
 
+import org.qfast.entities.AbstractTranslatableEntity;
+import org.qfast.util.SelectTranslatableBuilder;
+
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.TypedQuery;
-import org.qfast.entities.AbstractTranslatableEntity;
-import org.qfast.util.SelectTranslatableBuilder;
 
 /**
- * @author Ahmed El-mawaziny
  * @param <T>
+ * @author Ahmed El-mawaziny
  */
 public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableEntity>
         extends AbstractFacade<T> {
 
-    protected final Class<T> entityClass;
     private static final Logger LOG = Logger.getLogger(AbstractTranslatableFacade.class.getName());
+    protected final Class<T> entityClass;
 
     public AbstractTranslatableFacade(Class<T> entityClass) {
         super(entityClass);
@@ -62,7 +63,7 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
         try {
             SelectTranslatableBuilder<T> select
                     = new SelectTranslatableBuilder<>(entityClass,
-                            locale.toString());
+                    locale.toString());
             String sql = "SELECT " + select.get() + " FROM "
                     + entityClass.getSimpleName() + " " + select.getAlias()
                     + " WHERE " + select.getAlias() + ".id=:id";
@@ -85,7 +86,7 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
         try {
             SelectTranslatableBuilder<T> select
                     = new SelectTranslatableBuilder<>(entityClass,
-                            getLocale().toString());
+                    getLocale().toString());
             String sql = "SELECT " + select.get() + " FROM "
                     + entityClass.getSimpleName() + " " + select.getAlias();
             TypedQuery<T> q = getEntityManager().createQuery(sql, entityClass);
@@ -100,7 +101,7 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
         try {
             SelectTranslatableBuilder<T> select
                     = new SelectTranslatableBuilder<>(entityClass,
-                            getLocale().toString());
+                    getLocale().toString());
             String sql = "SELECT " + select.get() + " FROM "
                     + entityClass.getSimpleName() + " " + select.getAlias()
                     + " ORDER BY " + select.getAlias() + "." + columnName
@@ -118,7 +119,7 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
         try {
             SelectTranslatableBuilder<T> select
                     = new SelectTranslatableBuilder<>(entityClass,
-                            getLocale().toString());
+                    getLocale().toString());
             String sql = "SELECT " + select.get() + " FROM "
                     + entityClass.getSimpleName() + " " + select.getAlias();
             TypedQuery<T> q = getEntityManager().createQuery(sql, entityClass);

@@ -24,36 +24,40 @@ import java.util.List;
  */
 public interface InterfaceFacade<T> {
 
-    public int count();
+    int count();
 
-    public void create(T entity);
+    void create(T entity);
 
-    public void create(Collection<T> entities);
+    void create(Collection<T> entities);
 
-    public void edit(T entity);
+    void edit(T entity);
 
-    public T merge(T entity);
+    T merge(T entity);
 
-    public Collection<T> merge(Collection<T> entities);
+    Collection<T> merge(Collection<T> entities);
 
-    public void edit(Collection<T> entities);
+    void edit(Collection<T> entities);
 
-    public void edit(T[] entities);
+    void edit(T[] entities);
 
-    public T find(Object id);
+    T find(Object id);
 
-    public List<T> findAll();
+    List<T> find(Object[] id);
 
-    public List<T> findAllOrderBy(String columnName, boolean desc);
+    List<T> findAll(List ids);
 
-    public List<T> findRange(int[] range);
+    List<T> findAll();
 
-    public void remove(T entity);
+    List<T> findAllOrderBy(String columnName, boolean desc);
 
-    public void remove(Collection<T> entities);
+    List<T> findRange(int[] range);
 
-    public void remove(T[] entities);
+    void remove(T entity);
 
-    public void removeAll(String[] ids);
+    void remove(Collection<T> entities);
+
+    void remove(T[] entities);
+
+    void removeAll(String[] ids);
 
 }

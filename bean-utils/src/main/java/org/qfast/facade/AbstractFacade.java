@@ -20,6 +20,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -113,6 +114,20 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
     @Override
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
+    }
+
+    @Override
+    public List<T> find(Object[] ids) {
+        List<T> ts = new ArrayList<>(ids.length);
+        for (Object id : ids) {
+            ts.add(find(id));
+        }
+        return ts;
+    }
+
+    @Override
+    public List<T> findAll(List ids) {
+        return find(ids.toArray(new Object[ids.size()]));
     }
 
     @Override

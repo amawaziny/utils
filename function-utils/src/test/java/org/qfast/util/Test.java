@@ -18,9 +18,14 @@ package org.qfast.util;
 
 import static java.nio.charset.StandardCharsets.UTF_16BE;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -38,52 +43,12 @@ public class Test {
 //        System.out.println(Util.rpadTrunk("dopay", 1));
 //        System.out.println(Arrays.toString(getBytes("عربي Test")));
 
-        TestClass t= new TestClass();
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(t.date));
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(t.date);
-        t= new TestClass();
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(t.date));
+        DecimalFormat df = (DecimalFormat) NumberFormat.getInstance(new Locale("en","US"));
+        df.setParseBigDecimal(true);
+        ParsePosition pos = new ParsePosition(0);
+
+        String value = "111,110,000,118.";
+        System.out.println((BigDecimal)df.parse(value,pos));
     }
 //    
 //    private static byte[] getBytes(String message) {
@@ -103,8 +68,4 @@ public class Test {
 //    public static boolean isLatinLetter(char c) {
 //        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 //    }
-
-    static class TestClass{
-        public final static Date date = new Date();
-    }
 }
