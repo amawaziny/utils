@@ -55,6 +55,11 @@ public abstract class AbstractService<T> implements InterfaceFacade<T>, Serializ
     }
 
     @Override
+    public List<T> mergeAndFlush(List<T> entities) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void edit(Collection<T> entities) {
         throw new UnsupportedOperationException("Not supported yet.");
     }

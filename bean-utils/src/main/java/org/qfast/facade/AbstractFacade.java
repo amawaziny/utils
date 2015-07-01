@@ -71,6 +71,17 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
     }
 
     @Override
+    public List<T> mergeAndFlush(List<T> entities) {
+        List<T> ts = new ArrayList<>(entities.size());
+        for (T t : entities) {
+            T merged = merge(t);
+            getEntityManager().flush();
+            ts.add(merged);
+        }
+        return ts;
+    }
+
+    @Override
     public void edit(Collection<T> entities) {
         for (T t : entities) {
             edit(t);

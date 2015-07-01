@@ -36,6 +36,8 @@ public interface InterfaceFacade<T> {
 
     Collection<T> merge(Collection<T> entities);
 
+    List<T> mergeAndFlush(List<T> entities);
+
     void edit(Collection<T> entities);
 
     void edit(T[] entities);
@@ -59,5 +61,4 @@ public interface InterfaceFacade<T> {
     void remove(T[] entities);
 
     void removeAll(String[] ids);
-
 }
