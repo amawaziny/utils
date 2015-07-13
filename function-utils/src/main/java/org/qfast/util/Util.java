@@ -364,6 +364,14 @@ public final class Util {
         return c.getTime();
     }
 
+    public static Date getDateYearsFirst(int years) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.MONTH, 0);
+        c.set(Calendar.DATE, 1);
+        c.add(Calendar.YEAR, years);
+        return c.getTime();
+    }
+
     public static int getLastDayInMonth(int year, int month) {
         Calendar cal = Calendar.getInstance();
         cal.set(year, (month - 1), 1);
