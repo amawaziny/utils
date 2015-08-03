@@ -104,8 +104,8 @@ public class PDFExporter extends Exporter {
 
         String fontPath = classLoader.getResource("fonts/arial.ttf").getPath();
 
-        cellFont = FontFactory.getFont(fontPath, encoding, 6);
-        this.facetFont = FontFactory.getFont(fontPath, encoding, 8, Font.BOLD);
+        cellFont = FontFactory.getFont(fontPath, encoding, 12);
+        this.facetFont = FontFactory.getFont(fontPath, encoding, 14, Font.BOLD);
 
         int columnsCount = getColumnsCount(table);
         PdfPTable pdfTable = new PdfPTable(columnsCount);
