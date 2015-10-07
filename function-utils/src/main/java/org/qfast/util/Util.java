@@ -216,7 +216,11 @@ public final class Util {
         }
     }
 
-    public static String getHash(String plain, String algorithm) {
+    public static String removeDistortion(String hash) {
+        return hash.substring(0, 5) + hash.substring(10, hash.length());
+    }
+
+    public static String getHash(String plain, String algorithm, boolean distortion) {
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update(plain.getBytes("UTF-8"));
@@ -225,11 +229,17 @@ public final class Util {
             for (int i = 0; i < digest.length; i++) {
                 sb.append(Integer.toString((digest[i] & 0xff) + 0x100, 16).substring(1));
             }
+            if (distortion)
+                sb.insert(5, RandomStringUtils.random(5, true, true));
             return sb.toString();
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             LOG.severe(ex.getLocalizedMessage());
             return plain;
         }
+    }
+
+    public static String getHash(String plain, String algorithm) {
+        return getHash(plain, algorithm, false);
     }
 
     public static String getBundleMessage(String messageName) {
@@ -397,7 +407,10 @@ public final class Util {
         return newS;
     }
 
-    public static <T> T setData(Class<T> c, MultivaluedMap<String, String> formValues) throws InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException, ParseException {
+    public static <T> T setData(Class<T> c, MultivaluedMap<String, String> formValues)
+            throws InstantiationException, IllegalAccessException, NoSuchMethodException,
+            IllegalArgumentException, InvocationTargetException, ParseException {
+
         T instance = c.newInstance();
         Class<? extends Object> aClass = instance.getClass();
         Field[] fields = aClass.getFields();
@@ -487,8 +500,9 @@ public final class Util {
             centuryDigit = 3;
         }
 
-        NationalID nationalID = new NationalID(centuryDigit + "" + (sdf2.format(sdf.parse(year + "-" + mon + "-" + day))) + "" + governorateCode + "" + birthSerial + "" + fm + "" + last);
-        return nationalID;
+        return new NationalID(centuryDigit + "" +
+                (sdf2.format(sdf.parse(year + "-" + mon + "-" + day))) + "" +
+                governorateCode + "" + birthSerial + "" + fm + "" + last);
     }
 
     public static Integer[] addArrays(Integer[] a, Integer[] b) {

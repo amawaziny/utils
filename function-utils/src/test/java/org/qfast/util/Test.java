@@ -16,19 +16,6 @@
 
 package org.qfast.util;
 
-import static java.nio.charset.StandardCharsets.UTF_16BE;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Locale;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 /**
  * @author Ahmed El-mawaziny
  */
@@ -43,12 +30,17 @@ public class Test {
 //        System.out.println(Util.rpadTrunk("dopay", 1));
 //        System.out.println(Arrays.toString(getBytes("عربي Test")));
 
-        DecimalFormat df = (DecimalFormat) NumberFormat.getInstance(new Locale("en","US"));
+        /*DecimalFormat df = (DecimalFormat) NumberFormat.getInstance(new Locale("en","US"));
         df.setParseBigDecimal(true);
         ParsePosition pos = new ParsePosition(0);
 
         String value = "111,110,000,118.";
-        System.out.println((BigDecimal)df.parse(value,pos));
+        System.out.println((BigDecimal)df.parse(value,pos));*/
+
+        System.out.println(Util.getHash("Test1234", "SHA-256"));
+        String hash = Util.getHash("Test1234", "SHA-256", true);
+        System.out.println(hash);
+        System.out.println(Util.removeDistortion(hash));
     }
 //    
 //    private static byte[] getBytes(String message) {
