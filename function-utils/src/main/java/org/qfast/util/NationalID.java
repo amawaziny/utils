@@ -15,35 +15,51 @@
  */
 package org.qfast.util;
 
-import static org.qfast.util.Util.getBundleMessage;
-import static org.qfast.util.Util.isNULL;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.qfast.util.Util.getBundleMessage;
+import static org.qfast.util.Util.isNULL;
+
 public final class NationalID {
 
-    private final String nationalId;
     private static final int FixedLength = 14;
+    private final String nationalId;
 
     public NationalID(String nationalId) {
+        this(nationalId, (String) null);
+    }
+
+    public NationalID(String nationalId, String baseName) {
+        this(nationalId, baseName, null);
+    }
+
+    public NationalID(String nationalId, Locale locale) {
+        this(nationalId, null, locale);
+    }
+
+    public NationalID(String nationalId, String baseName, Locale locale) {
         if (isNULL(nationalId)) {
             System.out.println("NationalIdIsNull");
-            throw new IllegalArgumentException(getBundleMessage("NationalIdIsNull"));
+            throw new IllegalArgumentException(getBundleMessage(baseName, "NationalIdIsNull", locale));
         }
         if (nationalId.length() != FixedLength) {
             System.out.println("NationalIdLength");
-            throw new IllegalArgumentException(String.format(getBundleMessage("NationalIdLength"), nationalId));
+            throw new IllegalArgumentException(String.format(getBundleMessage(baseName, "NationalIdLength",
+                    locale), nationalId));
         }
-        if (!Util.isInteger(nationalId)) {            
+        if (!Util.isInteger(nationalId)) {
             System.out.println("NationalidContainsCharcters");
-            throw new IllegalArgumentException(getBundleMessage("NationalidContainsCharcters"));
+            throw new IllegalArgumentException(getBundleMessage(baseName, "NationalidContainsCharcters", locale));
         }
         this.nationalId = nationalId;
+
     }
 
     public NationalID(BigInteger nationalId) {

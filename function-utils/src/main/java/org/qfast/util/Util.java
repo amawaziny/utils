@@ -255,6 +255,17 @@ public final class Util {
         }
     }
 
+    public static String getBundleMessage(String baseName, String messageName, Locale locale) {
+        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        if (isNULL(baseName)) {
+            baseName = "/resources.Bundle";
+        }
+        if (locale == null) {
+            locale = getDefaultLocale();
+        }
+        return ResourceBundle.getBundle(baseName, locale, contextClassLoader).getString(messageName);
+    }
+
     public static Locale getDefaultLocale() {
         return new Locale("ar", "EG");
     }
