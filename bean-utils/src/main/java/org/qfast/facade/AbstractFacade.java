@@ -137,6 +137,7 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<T> findAll(List ids) {
         return find(ids.toArray(new Object[ids.size()]));
     }

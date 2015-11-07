@@ -229,8 +229,9 @@ public final class Util {
             for (int i = 0; i < digest.length; i++) {
                 sb.append(Integer.toString((digest[i] & 0xff) + 0x100, 16).substring(1));
             }
-            if (distortion)
+            if (distortion) {
                 sb.insert(5, RandomStringUtils.random(5, true, true));
+            }
             return sb.toString();
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             LOG.severe(ex.getLocalizedMessage());
@@ -354,7 +355,16 @@ public final class Util {
             Field f = t.getClass().getDeclaredField(fieldName);
             f.setAccessible(true);
             return f;
-        } catch (NoSuchFieldException | SecurityException ex) {
+        } catch (NoSuchFieldException ex) {
+            try {
+                Field f = t.getClass().getSuperclass().getDeclaredField(fieldName);
+                f.setAccessible(true);
+                return f;
+            } catch (NoSuchFieldException | SecurityException ex1) {
+                LOG.log(Level.SEVERE, null, ex);
+                return null;
+            }
+        } catch (SecurityException ex) {
             LOG.log(Level.SEVERE, null, ex);
             return null;
         }
@@ -511,9 +521,9 @@ public final class Util {
             centuryDigit = 3;
         }
 
-        return new NationalID(centuryDigit + "" +
-                (sdf2.format(sdf.parse(year + "-" + mon + "-" + day))) + "" +
-                governorateCode + "" + birthSerial + "" + fm + "" + last);
+        return new NationalID(centuryDigit + ""
+                + (sdf2.format(sdf.parse(year + "-" + mon + "-" + day))) + ""
+                + governorateCode + "" + birthSerial + "" + fm + "" + last);
     }
 
     public static Integer[] addArrays(Integer[] a, Integer[] b) {
@@ -524,7 +534,7 @@ public final class Util {
     }
 
     public static Map<String, String> getFragmentAsMap(String fragment,
-                                                       String splitToken) {
+            String splitToken) {
         if (!isNULL(fragment) && !isNULL(splitToken)) {
             String[] fragmentArr = fragment.split(splitToken);
             Map<String, String> map
