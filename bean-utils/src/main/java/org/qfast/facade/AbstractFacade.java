@@ -168,6 +168,19 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
         return q.getResultList();
     }
 
+    public List<T> findRangeOrderBy(int[] range, String columnName, boolean asc) {
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<T> cq = cb.createQuery(entityClass);
+        Root<T> rt = cq.from(entityClass);
+        cq = cq.select(rt);
+        if (columnName != null && !columnName.isEmpty())
+            cq.orderBy(asc ? cb.asc(rt.get(columnName)) : cb.desc(rt.get(columnName)));
+        return getEntityManager().createQuery(cq)
+                .setMaxResults(range[1])
+                .setFirstResult(range[0])
+                .getResultList();
+    }
+
     @Override
     public int count() {
         CriteriaBuilder cp = getEntityManager().getCriteriaBuilder();
