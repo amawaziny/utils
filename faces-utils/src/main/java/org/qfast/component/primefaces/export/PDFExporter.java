@@ -406,11 +406,12 @@ public class PDFExporter extends Exporter {
     }
 
     protected void writePDFToResponse(ExternalContext externalContext, ByteArrayOutputStream baos, String fileName) throws IOException, DocumentException {
-        externalContext.setResponseContentType("application/pdf");
+        externalContext.setResponseContentType("application/pdf; charset=UTF-8");
+        externalContext.setResponseCharacterEncoding("UTF-8");
         externalContext.setResponseHeader("Expires", "0");
         externalContext.setResponseHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
         externalContext.setResponseHeader("Pragma", "public");
-        externalContext.setResponseHeader("Content-disposition", "attachment;filename=" + fileName + ".pdf");
+        externalContext.setResponseHeader("Content-disposition", "attachment;filename*=UTF-8''" + fileName + ".pdf");
         externalContext.setResponseContentLength(baos.size());
         externalContext.addResponseCookie(Constants.DOWNLOAD_COOKIE, "true", new HashMap<String, Object>());
         OutputStream out = externalContext.getResponseOutputStream();
