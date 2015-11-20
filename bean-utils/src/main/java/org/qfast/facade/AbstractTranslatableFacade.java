@@ -99,9 +99,7 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
     @Override
     public List<T> findAllOrderBy(String columnName, boolean desc) {
         try {
-            SelectTranslatableBuilder<T> select
-                    = new SelectTranslatableBuilder<>(entityClass,
-                    getLocale().toString());
+            SelectTranslatableBuilder<T> select = new SelectTranslatableBuilder<>(entityClass, getLocale().toString());
             String sql = "SELECT " + select.get() + " FROM "
                     + entityClass.getSimpleName() + " " + select.getAlias()
                     + " ORDER BY " + select.getAlias() + "." + columnName
@@ -128,6 +126,23 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
             return q.getResultList();
         } catch (InstantiationException | IllegalAccessException ex) {
             throw new Error(ex);
+        }
+    }
+
+
+    public List<T> findRangeOrderBy(int[] range, String columnName, boolean asc) {
+        try {
+            SelectTranslatableBuilder<T> select = new SelectTranslatableBuilder<>(entityClass, getLocale().toString());
+            String sql = "SELECT " + select.get() + " FROM "
+                    + entityClass.getSimpleName() + " " + select.getAlias();
+            if (columnName != null && !columnName.isEmpty())
+                sql += " ORDER BY " + select.getAlias() + "." + columnName + (asc ? " ASC" : " DESC");
+            return getEntityManager().createQuery(sql, entityClass)
+                    .setMaxResults(range[1])
+                    .setFirstResult(range[0])
+                    .getResultList();
+        } catch (IllegalAccessException | InstantiationException e) {
+            throw new Error(e);
         }
     }
 }

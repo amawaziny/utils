@@ -23,6 +23,8 @@ import java.util.Map;
  */
 public abstract class AbstractTranslatableEntity implements Serializable, Comparable<AbstractTranslatableEntity> {
 
+    private static final long serialVersionUID = -860560266031983029L;
+
     public abstract Object getId();
 
     public abstract String getTableName();
@@ -39,11 +41,12 @@ public abstract class AbstractTranslatableEntity implements Serializable, Compar
     @Override
     public int compareTo(AbstractTranslatableEntity o) {
         Object id = getId();
-        if (id instanceof Integer) {
-            return ((Integer) id).compareTo((Integer) o.getId());
+        if (id != null) {
+            if (id instanceof Integer) {
+                return ((Integer) id).compareTo((Integer) o.getId());
+            }
+            return id.toString().compareTo(o.getId().toString());
         }
-        return id.toString().compareTo(o.getId().toString());
+        return 0;
     }
-
-    private static final long serialVersionUID = -860560266031983029L;
 }
