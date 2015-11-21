@@ -16,8 +16,10 @@
 package org.qfast.component.primefaces.export;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.lang.reflect.Array;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -183,12 +185,15 @@ public class CSVExporter extends Exporter {
         }
     }
 
-    protected void configureResponse(ExternalContext externalContext, String filename) {
-        externalContext.setResponseContentType("text/csv");
+    protected void configureResponse(ExternalContext externalContext, String filename) throws IOException {
+        filename = filename.replace(" ", "_");
+        filename = URLEncoder.encode(filename, "UTF-8");
+        externalContext.setResponseContentType("text/csv; charset=UTF-8");
+        externalContext.setResponseCharacterEncoding("UTF-8");
         externalContext.setResponseHeader("Expires", "0");
         externalContext.setResponseHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
         externalContext.setResponseHeader("Pragma", "public");
-        externalContext.setResponseHeader("Content-disposition", "attachment;filename=" + filename + ".csv");
+        externalContext.setResponseHeader("Content-disposition", "attachment;filename*=UTF-8''" + filename + ".csv");
         externalContext.addResponseCookie(Constants.DOWNLOAD_COOKIE, "true", new HashMap<String, Object>());
     }
 

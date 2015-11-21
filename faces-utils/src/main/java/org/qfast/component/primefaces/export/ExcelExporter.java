@@ -18,6 +18,7 @@ package org.qfast.component.primefaces.export;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -232,11 +233,14 @@ public class ExcelExporter extends Exporter {
     }
 
     protected void writeExcelToResponse(ExternalContext externalContext, Workbook generatedExcel, String filename) throws IOException {
-        externalContext.setResponseContentType("application/vnd.ms-excel");
+        filename = filename.replace(" ", "_");
+        filename = URLEncoder.encode(filename, "UTF-8");
+        externalContext.setResponseContentType("application/vnd.ms-excel; charset=UTF-8");
+        externalContext.setResponseCharacterEncoding("UTF-8");
         externalContext.setResponseHeader("Expires", "0");
         externalContext.setResponseHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
         externalContext.setResponseHeader("Pragma", "public");
-        externalContext.setResponseHeader("Content-disposition", "attachment;filename=" + filename + ".xls");
+        externalContext.setResponseHeader("Content-disposition", "attachment;filename*=UTF-8''" + filename + ".xls");
         externalContext.addResponseCookie(Constants.DOWNLOAD_COOKIE, "true", new HashMap<String, Object>());
 
         OutputStream out = externalContext.getResponseOutputStream();
