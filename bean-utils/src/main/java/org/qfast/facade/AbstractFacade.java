@@ -23,7 +23,13 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import static javax.validation.Validation.buildDefaultValidatorFactory;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 /**
  * @param <T>
@@ -31,8 +37,8 @@ import java.util.List;
  */
 public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
 
-
     private final Class<T> entityClass;
+    protected static final ValidatorFactory FACTORY = buildDefaultValidatorFactory();
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -42,7 +48,23 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
 
     @Override
     public void create(T entity) {
+        validate(entity);
         getEntityManager().persist(entity);
+    }
+
+    public void validate(T entity) {
+        Validator validator = FACTORY.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
+        if (!constraintViolations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
+            while (iterator.hasNext()) {
+                ConstraintViolation<T> cv = iterator.next();
+                sb.append("\n").append(cv.getRootBeanClass().getSimpleName()).append(".").append(cv.getPropertyPath())
+                        .append(": ").append(cv.getMessage());
+            }
+            throw new Error(sb.toString());
+        }
     }
 
     @Override
@@ -173,8 +195,9 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
         CriteriaQuery<T> cq = cb.createQuery(entityClass);
         Root<T> rt = cq.from(entityClass);
         cq = cq.select(rt);
-        if (columnName != null && !columnName.isEmpty())
+        if (columnName != null && !columnName.isEmpty()) {
             cq.orderBy(asc ? cb.asc(rt.get(columnName)) : cb.desc(rt.get(columnName)));
+        }
         return getEntityManager().createQuery(cq)
                 .setMaxResults(range[1])
                 .setFirstResult(range[0])
