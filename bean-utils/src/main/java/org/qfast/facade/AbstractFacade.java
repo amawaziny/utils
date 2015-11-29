@@ -63,7 +63,7 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
                 sb.append("\n").append(cv.getRootBeanClass().getSimpleName()).append(".").append(cv.getPropertyPath())
                         .append(": ").append(cv.getMessage());
             }
-            throw new Error(sb.toString());
+            throw new IllegalStateException(sb.toString());
         }
     }
 
