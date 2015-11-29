@@ -76,11 +76,12 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
 
     @Override
     public void edit(T entity) {
-        getEntityManager().merge(entity);
+        merge(entity);
     }
 
     @Override
     public T merge(T entity) {
+        validate(entity);
         return getEntityManager().merge(entity);
     }
 
