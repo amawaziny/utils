@@ -61,4 +61,10 @@ public interface InterfaceFacade<T> {
     void remove(T[] entities);
 
     void removeAll(String[] ids);
+
+    void detach(T entity);
+
+    void detach(T[] entity);
+
+    void detach(Collection<T> entity);
 }

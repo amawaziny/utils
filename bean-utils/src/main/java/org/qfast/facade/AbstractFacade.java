@@ -146,6 +146,25 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
     }
 
     @Override
+    public void detach(T entity) {
+        getEntityManager().detach(entity);
+    }
+
+    @Override
+    public void detach(T[] entities) {
+        for (T t : entities) {
+            detach(t);
+        }
+    }
+
+    @Override
+    public void detach(Collection<T> entities) {
+        for (T t : entities) {
+            detach(t);
+        }
+    }
+
+    @Override
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
