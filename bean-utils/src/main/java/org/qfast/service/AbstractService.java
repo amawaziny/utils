@@ -113,4 +113,20 @@ public abstract class AbstractService<T> implements InterfaceFacade<T>, Serializ
     public void removeAll(String[] ids) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public void detach(T entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void detach(T[] entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void detach(Collection<T> entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
