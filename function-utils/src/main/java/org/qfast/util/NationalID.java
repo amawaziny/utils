@@ -29,8 +29,10 @@ import static org.qfast.util.Util.isNULL;
 
 public final class NationalID {
 
-    private static final int FixedLength = 14;
+    private static final int FIXED_LENGTH = 14;
     private final String nationalId;
+    private final String baseName;
+    private final Locale locale;
 
     public NationalID(String nationalId) {
         this(nationalId, (String) null);
@@ -47,19 +49,20 @@ public final class NationalID {
     public NationalID(String nationalId, String baseName, Locale locale) {
         if (isNULL(nationalId)) {
             System.out.println("NationalIdIsNull");
-            throw new IllegalArgumentException(getBundleMessage(baseName, "NationalIdIsNull", locale));
+            throw new IllegalArgumentException(getMessege("NationalIdIsNull"));
         }
-        if (nationalId.length() != FixedLength) {
+        if (nationalId.length() != FIXED_LENGTH) {
             System.out.println("NationalIdLength");
             throw new IllegalArgumentException(String.format(getBundleMessage(baseName, "NationalIdLength",
                     locale), nationalId));
         }
         if (!Util.isInteger(nationalId)) {
             System.out.println("NationalidContainsCharcters");
-            throw new IllegalArgumentException(getBundleMessage(baseName, "NationalidContainsCharcters", locale));
+            throw new IllegalArgumentException(getMessege("NationalidContainsCharcters"));
         }
         this.nationalId = nationalId;
-
+        this.baseName = baseName;
+        this.locale = locale;
     }
 
     public NationalID(BigInteger nationalId) {
@@ -70,6 +73,10 @@ public final class NationalID {
         this(String.valueOf(nationalId));
     }
 
+    private String getMessege(String key) {
+        return getBundleMessage(baseName, key, locale);
+    }
+
     public Date getBirthDate() {
         Date birthDate = null;
         char centuryDigit = nationalId.charAt(0);
@@ -78,18 +85,18 @@ public final class NationalID {
 
             int day = Integer.parseInt(nationalId.substring(5, 7));
             if (!(day >= 1 && day <= 31)) {
-                throw new IllegalArgumentException(getBundleMessage("BarthDayError"));
+                throw new IllegalArgumentException(getMessege("BarthDayError"));
             }
 
             int month = Integer.parseInt(nationalId.substring(3, 5));
             if (!(month >= 1 && month <= 12)) {
-                throw new IllegalArgumentException(getBundleMessage("BarthMonthError"));
+                throw new IllegalArgumentException(getMessege("BarthMonthError"));
             }
 
             int year = Integer.parseInt(nationalId.substring(1, 3));
             year += 1900 + (100 * (Integer.parseInt(centuryDigit + "") - 2));
             if (year >= Calendar.getInstance().get(Calendar.YEAR)) {
-                throw new IllegalArgumentException(getBundleMessage("BarthYearError"));
+                throw new IllegalArgumentException(getMessege("BarthYearError"));
             }
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -133,7 +140,7 @@ public final class NationalID {
             return getBirthGovernorateCode() != null && getBirthSerial() != null;
         } else {
             System.out.println("Legal");
-            throw new IllegalArgumentException(getBundleMessage("LegalTransFered"));
+            throw new IllegalArgumentException(getMessege("LegalTransFered"));
         }
     }
 
