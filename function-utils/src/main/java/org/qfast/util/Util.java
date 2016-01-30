@@ -30,6 +30,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -462,19 +463,63 @@ public final class Util {
         return val;
     }
 
-    public static void writeBase64(String base64Str, String filePath) throws FileNotFoundException, IOException {
-        byte[] btDataFile = Base64.decodeBase64(base64Str);
+    public static File writeBase64(String base64Str, String filePath) throws IOException {
+        byte[] btDataFile = Base64.decodeBase64(extractBase64(base64Str));
         File of = new File(filePath);
-        FileOutputStream osf = new FileOutputStream(of);
-        osf.write(btDataFile);
-        osf.flush();
+        String fileName = of.getName();
+        //1. check if file has extension
+        if (fileName.indexOf('.') == -1) {
+            //2. if not get extension from base64
+            filePath += '.' + getExtBase64(base64Str);
+            of = new File(filePath);
+        }
+        File parentFile = of.getParentFile();
+        boolean folderExists = true;
+        if (!parentFile.exists()) {
+            folderExists = parentFile.mkdirs();
+        }
+        if (folderExists) {
+            try (FileOutputStream osf = new FileOutputStream(of)) {
+                osf.write(btDataFile);
+                osf.flush();
+            }
+            return of;
+        } else {
+            throw new IOException("Cannot write file");
+        }
+    }
+
+    public static String getExtBase64(String base64Str) {
+        String[] split = base64Str.substring(0, base64Str.indexOf(';')).split("/");
+        if (split != null && split.length != 0) {
+            return split[1];
+        }
+        return "";
+    }
+
+    public static boolean isBase64(String base64Str) {
+        return !isNULL(base64Str) && Base64.isBase64(extractBase64(base64Str));
     }
 
     public static byte[] getImage(String imgSrc) {
-        if (imgSrc.contains("data:image")) {
-            imgSrc = imgSrc.substring(imgSrc.indexOf(',') + ",".length(), imgSrc.length());
+        return Base64.decodeBase64(extractBase64(imgSrc));
+    }
+
+    public static String extractBase64(String base64Str) {
+        if (base64Str.contains("data:image")) {
+            base64Str = base64Str.substring(base64Str.indexOf(',') + ",".length(), base64Str.length());
         }
-        return Base64.decodeBase64(imgSrc);
+        return base64Str;
+    }
+
+    public static String getImageBase64(String filePath) throws IOException {
+        File f = new File(filePath);
+        if (f != null && f.exists()) {
+            String ext = getExtention(filePath);
+            byte[] bytes = Base64.encodeBase64(Files.readAllBytes(f.toPath()));
+            return "data:image/" + ext.replace(".", "") + ";base64," + new String(bytes);
+        }
+        throw new FileNotFoundException(filePath + " is not exists");
     }
 
     public static String editorSafeMode(String html) {
@@ -534,7 +579,7 @@ public final class Util {
     }
 
     public static Map<String, String> getFragmentAsMap(String fragment,
-            String splitToken) {
+                                                       String splitToken) {
         if (!isNULL(fragment) && !isNULL(splitToken)) {
             String[] fragmentArr = fragment.split(splitToken);
             Map<String, String> map

@@ -16,12 +16,17 @@
 
 package org.qfast.util;
 
+import java.io.File;
+import java.io.IOException;
+
+import static java.io.File.separator;
+
 /**
  * @author Ahmed El-mawaziny
  */
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        System.out.println(Util.getFragmentAsMap("menu_id=149", "&")); 
 //        Calendar now = Calendar.getInstance();
 //        Map<String, Integer> displayNames = now.getDisplayNames(Calendar.DAY_OF_WEEK,
@@ -36,11 +41,22 @@ public class Test {
 
         String value = "111,110,000,118.";
         System.out.println((BigDecimal)df.parse(value,pos));*/
-
-        System.out.println(Util.getHash("Test1234", "SHA-256"));
-        String hash = Util.getHash("Test1234", "SHA-256", true);
-        System.out.println(hash);
-        System.out.println(Util.removeDistortion(hash));
+//
+//        System.out.println(Util.getHash("Test1234", "SHA-256"));
+//        String hash = Util.getHash("Test1234", "SHA-256", true);
+//        System.out.println(hash);
+//        System.out.println(Util.removeDistortion(hash));
+        System.out.println(separator + "media" + separator + "mutabaa" + separator + "Data" + separator + "mutabaa_files_uploaded");
+        File f = new File("/home/ahmed/Download/test/test/test.txt");
+        File parentFile = f.getParentFile();
+        System.out.println(parentFile);
+        if (!parentFile.exists() ) {
+            boolean mkdirs = parentFile.mkdirs();
+            System.out.println(mkdirs);
+        }
+//        byte[] bytes = Base64.encodeBase64(Files.readAllBytes(new File("/home/ahmed/Downloads/osgibook_preview_20091217.pdf").toPath()));
+//        System.out.println(new String(bytes));
+//        System.out.println(Util.getExtBase64("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII="));
     }
 //    
 //    private static byte[] getBytes(String message) {
