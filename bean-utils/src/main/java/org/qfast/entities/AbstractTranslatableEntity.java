@@ -21,22 +21,14 @@ import java.util.Map;
 /**
  * @author Ahmed El-mawaziny
  */
-public abstract class AbstractTranslatableEntity implements Serializable, Comparable<AbstractTranslatableEntity> {
+public abstract class AbstractTranslatableEntity extends AbstractEntity implements Serializable, 
+        Comparable<AbstractTranslatableEntity> {
 
     private static final long serialVersionUID = -860560266031983029L;
-
-    public abstract Object getId();
-
-    public abstract String getTableName();
 
     public abstract String[] getColumns();
 
     public abstract Map<String, String> getTranslatableColumns();
-
-    public boolean isPersisted() {
-        Object id = getId();
-        return id != null || ((id instanceof Integer) && (((Integer) id) > 0));
-    }
 
     @Override
     public int compareTo(AbstractTranslatableEntity o) {

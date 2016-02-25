@@ -130,6 +130,7 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
     }
 
 
+    @Override
     public List<T> findRangeOrderBy(int[] range, String columnName, boolean asc) {
         try {
             SelectTranslatableBuilder<T> select = new SelectTranslatableBuilder<>(entityClass, getLocale().toString());
