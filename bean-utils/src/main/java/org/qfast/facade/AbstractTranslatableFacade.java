@@ -56,25 +56,28 @@ public abstract class AbstractTranslatableFacade<T extends AbstractTranslatableE
 
     @Override
     public T find(Object id) {
-        return find(id, getLocale());
+        if (id != null) return find(id, getLocale());
+        else return null;
     }
 
     public T find(Object id, Locale locale) {
-        try {
-            SelectTranslatableBuilder<T> select
-                    = new SelectTranslatableBuilder<>(entityClass,
-                    locale.toString());
-            String sql = "SELECT " + select.get() + " FROM "
-                    + entityClass.getSimpleName() + " " + select.getAlias()
-                    + " WHERE " + select.getAlias() + ".id=:id";
-            TypedQuery<T> q = getEntityManager().createQuery(sql, entityClass);
-            q.setParameter("id", id);
-            return q.getSingleResult();
-        } catch (InstantiationException | IllegalAccessException |
-                NonUniqueResultException | NoResultException ex) {
-            LOG.log(Level.SEVERE, ex.getMessage(), ex);
-            return null;
-        }
+        if (id != null)
+            try {
+                SelectTranslatableBuilder<T> select
+                        = new SelectTranslatableBuilder<>(entityClass,
+                        locale.toString());
+                String sql = "SELECT " + select.get() + " FROM "
+                        + entityClass.getSimpleName() + " " + select.getAlias()
+                        + " WHERE " + select.getAlias() + ".id=:id";
+                TypedQuery<T> q = getEntityManager().createQuery(sql, entityClass);
+                q.setParameter("id", id);
+                return q.getSingleResult();
+            } catch (InstantiationException | IllegalAccessException |
+                    NonUniqueResultException | NoResultException ex) {
+                LOG.log(Level.SEVERE, ex.getMessage(), ex);
+                return null;
+            }
+        else return null;
     }
 
     public T findById(Object id) {

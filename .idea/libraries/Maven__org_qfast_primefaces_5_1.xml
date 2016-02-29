@@ -6,6 +6,7 @@
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/qfast/primefaces/5.1/primefaces-5.1-javadoc.jar!/" />
     </JAVADOC>
+    <LIBRARY_FILE />
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/qfast/primefaces/5.1/primefaces-5.1-sources.jar!/" />
     </SOURCES>

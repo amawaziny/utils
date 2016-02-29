@@ -20,16 +20,17 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import javax.validation.ConstraintViolation;
+
 import static javax.validation.Validation.buildDefaultValidatorFactory;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 /**
  * @param <T>
@@ -166,14 +167,21 @@ public abstract class AbstractFacade<T> implements InterfaceFacade<T> {
 
     @Override
     public T find(Object id) {
-        return getEntityManager().find(entityClass, id);
+        if (id != null) {
+            return getEntityManager().find(entityClass, id);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public List<T> find(Object[] ids) {
         List<T> ts = new ArrayList<>(ids.length);
         for (Object id : ids) {
-            ts.add(find(id));
+            if (id != null)
+                ts.add(find(id));
+            else
+                ts.add(null);
         }
         return ts;
     }
