@@ -19,6 +19,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import javax.ws.rs.core.MultivaluedMap;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,6 +49,8 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * @author Ahmed El-mawaziny
@@ -672,5 +675,18 @@ public final class Util {
         } catch (UnsupportedEncodingException ignored) {
         }
         return s;
+    }
+
+    public static void addToZipFile(String fileName, ZipOutputStream zos) throws IOException {
+        File file = new File(fileName);
+        try (FileInputStream fis = new FileInputStream(file)) {
+            zos.putNextEntry(new ZipEntry(file.getName()));
+
+            byte[] bytes = new byte[1024];
+            int length;
+            while ((length = fis.read(bytes)) >= 0) {
+                zos.write(bytes, 0, length);
+            }
+        }
     }
 }
