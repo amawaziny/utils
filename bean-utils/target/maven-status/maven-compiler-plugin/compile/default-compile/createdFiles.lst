@@ -1,12 +1,12 @@
 org/qfast/entities/AbstractTranslatableEntity.class
 org/qfast/util/SelectTranslatableCompose.class
-org/qfast/reports/ReportResult.class
 org/qfast/qualifiers/MenuBarSession.class
+org/qfast/reports/ReportResult.class
 org/qfast/entities/IActivityLog.class
 org/qfast/reports/Report.class
-org/qfast/facade/InterfaceFacade.class
-org/qfast/service/AbstractService.class
 org/qfast/entities/AbstractEntity.class
+org/qfast/service/AbstractService.class
+org/qfast/facade/InterfaceFacade.class
 org/qfast/facade/AbstractTranslatableFacade.class
 org/qfast/validation/LocaleMessageInterpolator.class
 org/qfast/util/SelectTranslatableBuilder.class
