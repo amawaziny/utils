@@ -61,8 +61,8 @@
     </build>
     <modules>
         <module>bean-utils</module>
-        <module>faces-utils</module>
+        <!-- <module>faces-utils</module> -->
         <module>function-utils</module>
-        <module>utils</module>
+        <!-- <module>utils</module> -->
     </modules>
 </project>
